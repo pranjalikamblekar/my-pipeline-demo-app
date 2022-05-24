@@ -15,6 +15,7 @@ pipeline {
       
       steps {
         echo 'testing the application...'
+        echo 'trigger testing..'
       }
     }
     
