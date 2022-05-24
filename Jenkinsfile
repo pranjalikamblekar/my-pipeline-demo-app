@@ -1,29 +1,25 @@
 pipeline {
-  
   agent any
   
+  tools {
+    gradle 'Gradle-7.5'
+  }
+  
   stages {
-    
-    stage("build") {
-      
+    stage("run frontend") {
       steps {
-        echo 'building the application...'
+        echo 'executing yarn...'
+        nodejs('Node-18.1.0') {
+          bash 'yarn install'
+        }
       }
     }
-    
-    stage("test") {
-      
+    stage('run backend') {
       steps {
-        echo 'testing the application...'
-        echo 'trigger testing..'
-      }
-    }
-    
-    stage("deploy") {
-      
-      steps {
-        echo 'deploying the application...';
+        echo 'executing gradle...'
+        bash './gradlew -v'
       }
     }
   }
 }
+  
